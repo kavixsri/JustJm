@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JustJam - AI-Powered Urban Traffic Management System for Delhi NCR">
+    <meta name="keywords" content="traffic management, AI, Delhi, smart city, VIP movement predictor">
+    <meta name="author" content="JustJam Team">
+    <title>JustJam Delhi - AI Traffic Command Center</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; }
+        #root { width: 100%; height: 100vh; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { Activity, TrendingUp, TrendingDown, Zap, Navigation, AlertTriangle, CheckCircle, Clock, Users, Leaf, BarChart3, MapPin, Radio, Brain, Shield, Eye, Bell } = lucide;
+
+        const DelhiTrafficOptimizerApp = () => {
+          const [activeTab, setActiveTab] = useState('overview');
+          const [liveData, setLiveData] = useState({
+            avgSpeed: 28,
+            congestionLevel: 82,
+            activeSensors: 3247,
+            incidentCount: 7,
+            vipMovements: 2,
+            pollution: 348
+          });
+          const [trafficFlow, setTrafficFlow] = useState(75);
+
+          useEffect(() => {
+            const interval = setInterval(() => {
+              setLiveData(prev => ({
+                avgSpeed: Math.max(15, Math.min(50, prev.avgSpeed + (Math.random() - 0.5) * 4)),
+                congestionLevel: Math.max(50, Math.min(95, prev.congestionLevel + (Math.random() - 0.5) * 6)),
+                activeSensors: 3247 + Math.floor(Math.random() * 20),
+                incidentCount: Math.max(0, Math.min(12, prev.incidentCount + (Math.random() > 0.8 ? 1 : -0.2))),
+                vipMovements: Math.max(0, Math.min(5, prev.vipMovements + (Math.random() > 0.85 ? 1 : -0.3))),
+                pollution: Math.max(250, Math.min(450, prev.pollution + (Math.random() - 0.5) * 15))
+              }));
+              setTrafficFlow(prev => Math.max(60, Math.min(95, prev + (Math.random() - 0.5) * 10)));
+            }, 2500);
+            return () => clearInterval(interval);
+          }, []);
